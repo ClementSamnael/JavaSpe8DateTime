@@ -12,6 +12,12 @@ public class GestionList {
 	private static List<LocalTime> time;
 	private static List<LocalDateTime> dateTime;	
 	
+	public GestionList() {
+		date = new ArrayList<LocalDate>();
+		time = new ArrayList<LocalTime>();
+		dateTime = new ArrayList<LocalDateTime>();
+	}
+	
 	public static List<LocalDate> getDate() {
 		return date;
 	}
@@ -31,9 +37,5 @@ public class GestionList {
 		GestionList.dateTime = dateTime;
 	}
 
-	private GestionList() {
-		date = new ArrayList<LocalDate>();
-		time = new ArrayList<LocalTime>();
-		dateTime = new ArrayList<LocalDateTime>();
-	}
+	
 }
