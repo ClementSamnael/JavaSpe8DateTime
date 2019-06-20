@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import bo.GestionList;
+
 public class Menu {
 
 	public static void main(String[] args) {
@@ -14,10 +16,9 @@ public class Menu {
 
 		Scanner scan = new Scanner(System.in);
 		while (choix != 4) {
-			System.out.println("Choix de la date");
-			System.out.println("1. Saisir une date (jour/mois/annee");
-			System.out.println("2. Saisir un temps (heures:minutes:secondes");
-			System.out.println("3. Saisir une date et un temps (jour/mois/annee heures:minutes:secondes");
+			System.out.println("1. Saisir une date (jour/mois/année)");
+			System.out.println("2. Saisir un temps (heures:minutes:secondes)");
+			System.out.println("3. Saisir une date et un temps (jour/mois/annee heures:minutes:secondes)");
 			System.out.println("4. Quitter");
 			choix = scan.nextInt();
 			switch (choix) {
@@ -54,9 +55,9 @@ public class Menu {
 			} else {
 				System.out.println("Anné incorrecte");
 			}
-		}
-		System.out.println();
-		while (!valid) {
+
+			System.out.println();
+
 			System.out.println("Entrer le mois en chiffre");
 			month = scan.nextInt();
 			if (month > 0 && month <= 12) {
@@ -64,10 +65,9 @@ public class Menu {
 			} else {
 				System.out.println("Mois incorrect");
 			}
-		}
-		System.out.println();
-		LocalDate testDay = LocalDate.of(year, month, 1);
-		while (!valid) {
+
+			System.out.println();
+			LocalDate testDay = LocalDate.of(year, month, 1);
 			System.out.println("Entrer le jour en chiffre");
 			day = scan.nextInt();
 			if (day > 0 && day <= testDay.lengthOfMonth()) {
@@ -79,6 +79,7 @@ public class Menu {
 
 		LocalDate ld = LocalDate.of(year, month, day);
 		System.out.println(ld.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		GestionList.getDate().add(ld);
 	}
 
 	public static void addTime(Scanner scan) {
@@ -90,14 +91,12 @@ public class Menu {
 		while (!valid) {
 			System.out.println("Entrer l'heure désirée");
 			hour = scan.nextInt();
-			if (hour > 0 && hour <= 12) {
+			if (hour >= 0 && hour <= 23) {
 				valid = true;
 			} else {
 				System.out.println("Heure incorrecte");
 			}
-		}
-		System.out.println();
-		while (!valid) {
+			System.out.println();
 			System.out.println("Entrer les minutes");
 			minute = scan.nextInt();
 			if (minute > 0 && minute <= 59) {
@@ -105,9 +104,7 @@ public class Menu {
 			} else {
 				System.out.println("Minutes incorrect");
 			}
-		}
-		System.out.println();
-		while (!valid) {
+			System.out.println();
 			System.out.println("Entrer les secondes");
 			second = scan.nextInt();
 			if (second > 0 && second < 60) {
@@ -119,10 +116,11 @@ public class Menu {
 
 		LocalTime lt = LocalTime.of(hour, minute, second);
 		System.out.println(lt.format(DateTimeFormatter.ofPattern("hh:mm:ss")));
+		GestionList.getTime().add(lt);
 	}
 
 	public static void addDateTime(Scanner scan) {
-		
+
 		int year = 0, month = 0, day = 0;
 		int hour = 0, minute = 0, second = 0;
 		boolean valid = false;
@@ -135,9 +133,8 @@ public class Menu {
 			} else {
 				System.out.println("Anné incorrecte");
 			}
-		}
-		System.out.println();
-		while (!valid) {
+
+			System.out.println();
 			System.out.println("Entrer le mois en chiffre");
 			month = scan.nextInt();
 			if (month > 0 && month <= 12) {
@@ -145,10 +142,9 @@ public class Menu {
 			} else {
 				System.out.println("Mois incorrect");
 			}
-		}
-		System.out.println();
-		LocalDate testDay = LocalDate.of(year, month, 1);
-		while (!valid) {
+
+			System.out.println();
+			LocalDate testDay = LocalDate.of(year, month, 1);
 			System.out.println("Entrer le jour en chiffre");
 			day = scan.nextInt();
 			if (day > 0 && day <= testDay.lengthOfMonth()) {
@@ -156,9 +152,7 @@ public class Menu {
 			} else {
 				System.out.println("Jour incorrect");
 			}
-		}
-		
-		while (!valid) {
+
 			System.out.println("Entrer l'heure désirée");
 			hour = scan.nextInt();
 			if (hour > 0 && hour <= 12) {
@@ -166,9 +160,8 @@ public class Menu {
 			} else {
 				System.out.println("Heure incorrecte");
 			}
-		}
-		System.out.println();
-		while (!valid) {
+
+			System.out.println();
 			System.out.println("Entrer les minutes");
 			minute = scan.nextInt();
 			if (minute > 0 && minute <= 59) {
@@ -176,9 +169,8 @@ public class Menu {
 			} else {
 				System.out.println("Minutes incorrect");
 			}
-		}
-		System.out.println();
-		while (!valid) {
+
+			System.out.println();
 			System.out.println("Entrer les secondes");
 			second = scan.nextInt();
 			if (second > 0 && second < 60) {
@@ -189,5 +181,7 @@ public class Menu {
 		}
 		LocalDateTime ldt = LocalDateTime.of(year, month, day, hour, minute, second);
 		System.out.println(ldt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss")));
+		GestionList.getDateTime().add(ldt);
+
 	}
 }
